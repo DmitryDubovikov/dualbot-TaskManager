@@ -1,5 +1,6 @@
 name: Main
 
+
 on:
   pull_request:
     branches:
@@ -8,11 +9,16 @@ on:
     branches:
       - 'develop'
 
+env:
+  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: DUALBOT-ENV
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
       - name: Run tests
         env:
           COVERAGE: true

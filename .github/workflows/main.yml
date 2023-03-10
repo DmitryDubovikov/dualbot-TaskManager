@@ -22,4 +22,4 @@ jobs:
         env:
           COVERAGE: true
           DJANGO_ENV: test
-        run: docker-compose --file docker-compose.ci.yml run --rm make test
+        run: docker-compose --file docker-compose.ci.yml run --rm api make test

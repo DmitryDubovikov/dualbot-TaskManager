@@ -1,5 +1,6 @@
 import django_filters
 from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework import viewsets
 
 from .models import User, Task, Tag
@@ -56,3 +57,9 @@ class TaskViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+
+
+def intentional_error(request):
+    a = None
+    a.hello()  # Creating an error with an invalid line of code
+    return HttpResponse("Hello, world. You're at the pollapp index.")

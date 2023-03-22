@@ -159,3 +159,8 @@ ROLLBAR = {
     "code_version": "1.0",
     "root": BASE_DIR,
 }
+
+
+DEFAULT_FROM_EMAIL = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]

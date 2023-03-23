@@ -26,12 +26,3 @@ def send_html_email(
         recipient_list=recipients,
         html_message=html_message,
     )
-
-
-def test_send_email(request) -> None:
-    send_html_email(
-        subject="test subject",
-        template="notification.html",
-        context=None,
-        recipients=["SomeRandomPythonCoder@gmail.com"],
-    )

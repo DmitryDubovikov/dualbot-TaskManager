@@ -13,7 +13,7 @@ x-db-config: &db-config
   DATABASE_PORT: 5432
   DEFAULT_FROM_EMAIL: SomeRandomPythonCoder@gmail.com
   EMAIL_HOST_USER: SomeRandomPythonCoder@gmail.com
-  EMAIL_HOST_PASSWORD: zocsjsrabyabpkcl
+  EMAIL_HOST_PASSWORD: notreal
   POSTGRES_PASSWORD: pgpassword
 
 services:

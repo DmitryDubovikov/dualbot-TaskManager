@@ -1,18 +1,8 @@
-from factory.django import DjangoModelFactory
-import factory
 from rest_framework.test import APITestCase
 from freezegun import freeze_time
 from datetime import timedelta
 from django.urls import reverse
-from main.models import User
-
-
-class UserFactory(DjangoModelFactory):
-    username = factory.Faker("user_name")
-    password = factory.PostGenerationMethodCall("set_password", "password")
-
-    class Meta:
-        model = User
+from factories import UserFactory
 
 
 class TestJWTAuth(APITestCase):

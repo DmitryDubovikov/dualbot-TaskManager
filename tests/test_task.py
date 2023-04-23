@@ -5,15 +5,6 @@ from main.models import User, Tag
 
 class TestTaskViewSet(TestViewSetBase):
     basename = "tasks"
-    login_user_attributes = {
-        "username": "userlogin",
-        "first_name": "John",
-        "last_name": "Smith",
-        "email": "john@test.com",
-        # "date_of_birth": "2000-01-01",
-        # "phone": "+79000000000",
-        "role": "developer",
-    }
 
     task_attributes = {
         "id": 1,

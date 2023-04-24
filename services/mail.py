@@ -6,12 +6,12 @@ from main.models import Task
 
 def send_assign_notification(task_id: int) -> None:
     task = Task.objects.get(pk=task_id)
-    assignee = task.assignee
+    executor = task.executor
     send_html_email(
         subject="You've assigned a task.",
         template="notification.html",
         context={"task": task},
-        recipients=[assignee.email],
+        recipients=[executor.email],
     )
 
 

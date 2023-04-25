@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from services.storage_backends import public_storage
 
 
 class User(AbstractUser):
@@ -13,6 +14,7 @@ class User(AbstractUser):
     )
     date_of_birth = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
+    avatar_picture = models.ImageField(null=True, storage=public_storage)
 
     def __str__(self) -> str:
         return f"{self.username} ({self.role})"

@@ -4,6 +4,8 @@ from rest_framework import status
 from django.urls import reverse
 from main.models import User
 from factories import UserFactory
+from http import HTTPStatus
+from requests.models import Response
 
 
 class TestViewSetBase(APITestCase):
@@ -71,3 +73,25 @@ class TestViewSetBase(APITestCase):
         response = self.client.delete(self.detail_url(key=args))
         assert response.status_code == 204
         return response.data
+
+    def request_single_resource(self, data: dict = None) -> Response:
+        return self.client.get(self.list_url(), data=data)
+
+    def single_resource(self, data: dict = None) -> dict:
+        response = self.request_single_resource(data)
+        print("############# response: ", response, type(response))
+        assert response.status_code == HTTPStatus.OK
+        return (
+            response.data
+        )  # TODO AttributeError: 'HttpResponse' object has no attribute 'data'
+
+    def request_patch_single_resource(self, attributes: dict) -> Response:
+        url = self.list_url()
+        return self.client.patch(url, data=attributes)
+
+    def patch_single_resource(self, attributes: dict) -> dict:
+        response = self.request_patch_single_resource(attributes)
+        assert response.status_code == HTTPStatus.OK, response.content
+        return (
+            response.data
+        )  # TODO AttributeError: 'HttpResponse' object has no attribute 'data'

@@ -2,9 +2,10 @@ import django_filters
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets
-
+from typing import cast
 from .models import User, Task, Tag
 from .serializers import UserSerializer, TaskSerializer, TagSerializer
+from services.single_resource import SingleResourceMixin, SingleResourceUpdateMixin
 
 
 class UserFilter(django_filters.FilterSet):
@@ -21,8 +22,17 @@ class UserViewSet(viewsets.ModelViewSet):
     filterset_class = UserFilter
 
 
-class TaskFilter(django_filters.FilterSet):
+class CurrentUserViewSet(
+    SingleResourceMixin, SingleResourceUpdateMixin, viewsets.ModelViewSet
+):
+    serializer_class = UserSerializer
+    queryset = User.objects.order_by("id")
 
+    def get_object(self) -> User:
+        return cast(User, self.request.user)
+
+
+class TaskFilter(django_filters.FilterSet):
     status = django_filters.CharFilter(lookup_expr="icontains")
     author = django_filters.CharFilter(
         field_name="author__username", lookup_expr="icontains"
